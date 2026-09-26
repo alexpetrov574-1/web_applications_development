@@ -12,99 +12,137 @@ class Person {
    * @param {string} email - адрес электронной почты ученика
    */
   constructor(surname, name, patronymic, dateOfBirth, phoneNumber, email) {
-    this.surname = surname;
-    this.name = name;
-    this.patronymic = patronymic;
-    this.dateOfBirth = dateOfBirth;
-    this.phoneNumber = phoneNumber;
-    this.email = email;
+    this.Surname = surname;
+    this.Name = name;
+    this.Patronymic = patronymic;
+    this.DateOfBirth = dateOfBirth;
+    this.PhoneNumber = phoneNumber;
+    this.Email = email;
   }
 
   /**
-   * Геттер и сеттер для фамилии ученика
+   * Сеттер для фамилии ученика
+   * @param {string} value - значение фамилии ученика
    */
-  get surname() {
-    return this._surname;
-  }
-  set surname(value) {
-    if (value.length < 2) {
-      alert("Фамилия слишком короткая");
+  set Surname(value) {
+    if (value === "") {
+      alert("Строка пустая!!!!!");
       return;
     }
     this._surname = value;
   }
 
   /**
-   * Геттер и сеттер для имени ученика
+   * Геттер для фамилии ученика
    */
-  get name() {
-    return this._name;
+  get Surname() {
+    return this._surname;
   }
-  set name(value) {
-    if (value.length < 2) {
-      alert("Имя слишком короткое");
+
+  /**
+   * Сеттер для имени ученика
+   * @param {string} value - значение имени ученика
+   */
+  set Name(value) {
+    if (value === "") {
+      alert("Строка пустая!!!!!");
       return;
     }
     this._name = value;
   }
 
   /**
-   * Геттер и сеттер для отчества ученика
+   * Геттер для имени ученика
    */
-  get patronymic() {
-    return this._patronymic;
+  get Name() {
+    return this._name;
   }
-  set patronymic(value) {
-    if (value.length < 2) {
-      alert("Отчество слишком короткое");
+
+  /**
+   * Сеттер для отчества ученика
+   * @param {string} value - значение отчества ученика
+   */
+  set Patronymic(value) {
+    if (value === "") {
+      alert("Строка пустая!!!!!");
       return;
     }
     this._patronymic = value;
   }
 
   /**
-   * Геттер и сеттер для даты рождения ученика
+   * Геттер для отчества ученика
    */
-  get dateOfBirth() {
-    return this._dateOfBirth;
+  get Patronymic() {
+    return this._patronymic;
   }
-  set dateOfBirth(value) {
+
+  /**
+   * Сеттер для даты рождения ученика
+   * @param {string} value - значение даты рождения ученика
+   */
+  set DateOfBirth(value) {
     const currentDate = new Date();
     let dateOfBirth = new Date(value);
     if (dateOfBirth > currentDate) {
       alert("Дата рождения не может быть больше текущей даты");
       return;
     }
-    this._dateOfBirth = dateOfBirth;
+    this._dateOfBirth = new Intl.DateTimeFormat("ru", {
+      dateStyle: "medium",
+    }).format(dateOfBirth);
   }
 
   /**
-   * Геттер и сеттер для номера телефона ученика
+   * Геттер для даты рождения ученика
    */
-  get phoneNumber() {
-    return this._phoneNumber;
+  get DateOfBirth() {
+    return this._dateOfBirth;
   }
-  set phoneNumber(value) {
-    const exp = /\+7\(9(\d){2}\)(\d){3}-(\d){2}-(\d){2}$/;
-    if (!exp.match(value)) {
+
+  /**
+   * Сеттер для номера телефона ученика
+   * @param {string} value - значение номера телефона ученика
+   */
+  set PhoneNumber(value) {
+    const exp = /\+79(\d){2}(\d){3}(\d){2}(\d){2}$/;
+    if (!exp.test(value)) {
       alert("Неверный формат номера телефона");
+      return;
+    } else if (value === "") {
+      alert("Строка пустая!!!!!");
       return;
     }
     this._phoneNumber = value;
   }
 
   /**
-   * Геттер и сеттер для адреса электронной почты ученика
+   * Геттер для номера телефона ученика
    */
-  get email() {
-    return this._email;
+  get PhoneNumber() {
+    return this._phoneNumber;
   }
-  set email(value) {
-    const exp = /^[^@\s]+@[^@\s]+\.[^@\s]$/;
-    if (!exp.match(value)) {
+
+  /**
+   * Сеттер для адреса электронной почты ученика
+   * @param {string} value - значение адреса электронной почты ученика
+   */
+  set Email(value) {
+    const exp = /[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    if (!exp.test(value)) {
       alert("Неверный формат адреса электронной почты");
+      return;
+    } else if (value === "") {
+      alert("Строка пустая!!!!!");
       return;
     }
     this._email = value;
+  }
+
+  /**
+   * Геттер для адреса электронной почты ученика
+   */
+  get Email() {
+    return this._email;
   }
 }

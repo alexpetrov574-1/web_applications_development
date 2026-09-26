@@ -6,27 +6,32 @@
   </head>
   <body>
     <h1>Лабораторная работа №1. - Классы.</h1>
-    <form>
-      <p>Фамилия: <input type="text" name="surname" /></p>
-      <p>Имя: <input type="text" name="name" /></p>
-      <p>Отчество: <input type="text" name="patronymic" /></p>
-      <p>Дата рождения: <input type="date" name="dateOfBirth" /></p>
+    <form id="form-student" onsubmit="execute(event)">
+      <p>Фамилия: <input type="text" id="surname" /></p>
+      <p>Имя: <input type="text" id="name" /></p>
+      <p>Отчество: <input type="text" id="patronymic" /></p>
+      <p>Дата рождения: <input type="date" id="dateOfBirth" /></p>
       <p>
         Номер телефона:
         <input
           type="tel"
-          pattern="^\+7\(9\d{2}\)\d{3}-\d{2}-\d{2}$"
-          placeholder="+7(999)999-99-99"
-          name="phoneNumber"
+          pattern="^\+79\d{2}\d{3}\d{2}\d{2}$"
+          placeholder="+79999999999"
+          id="phoneNumber"
         />
       </p>
       <p>
         Адрес почты:
-        <input type="email" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" name="email" />
+        <input
+          type="email"
+          pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
+          id="email"
+          placeholder="example@mail.com"
+        />
       </p>
-      <input type="submit" value="Добавить" />
+      <button type="submit">Добавить</button>
     </form>
-    <table border="1" color="black">
+    <table border="1" color="black" id="tableOfPersons">
       <tr>
         <th>Фамилия</th>
         <th>Имя</th>
@@ -37,5 +42,7 @@
       </tr>
       <tbody></tbody>
     </table>
+    <script src="person.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>
