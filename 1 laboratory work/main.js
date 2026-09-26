@@ -29,20 +29,23 @@ function execute(event) {
   let phoneNumber = document.getElementById("phoneNumber").value;
   let email = document.getElementById("email").value;
 
-  try {
-    let newPerson = new Person(
-      surname,
-      name,
-      patronymic,
-      dateOfBirth,
-      phoneNumber,
-      email,
-    );
+  let newPerson = new Person(
+    surname,
+    name,
+    patronymic,
+    dateOfBirth,
+    phoneNumber,
+    email,
+  );
 
-    addPerson(newPerson);
+  addPerson(newPerson);
 
-    document.getElementById("form-student").reset();
-  } catch (error) {
-    alert(error.message);
-  }
+  document.getElementById("form-student").reset();
+}
+
+function SetRedColorInTextBox(objectElement) {
+  objectElement.style.backgroundColor = "indianred";
+}
+function SetWhiteColorInTextBox(objectElement) {
+  objectElement.style.backgroundColor = "white";
 }

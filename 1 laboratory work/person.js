@@ -21,18 +21,6 @@ class Person {
   }
 
   /**
-   * Сеттер для фамилии ученика
-   * @param {string} value - значение фамилии ученика
-   */
-  set Surname(value) {
-    if (value === "") {
-      alert("Строка пустая!!!!!");
-      return;
-    }
-    this._surname = value;
-  }
-
-  /**
    * Геттер для фамилии ученика
    */
   get Surname() {
@@ -40,15 +28,14 @@ class Person {
   }
 
   /**
-   * Сеттер для имени ученика
-   * @param {string} value - значение имени ученика
+   * Сеттер для фамилии ученика
+   * @param {string} value - значение фамилии ученика
    */
-  set Name(value) {
+  set Surname(value) {
     if (value === "") {
-      alert("Строка пустая!!!!!");
       return;
     }
-    this._name = value;
+    this._surname = value;
   }
 
   /**
@@ -59,15 +46,14 @@ class Person {
   }
 
   /**
-   * Сеттер для отчества ученика
-   * @param {string} value - значение отчества ученика
+   * Сеттер для имени ученика
+   * @param {string} value - значение имени ученика
    */
-  set Patronymic(value) {
+  set Name(value) {
     if (value === "") {
-      alert("Строка пустая!!!!!");
       return;
     }
-    this._patronymic = value;
+    this._name = value;
   }
 
   /**
@@ -78,19 +64,14 @@ class Person {
   }
 
   /**
-   * Сеттер для даты рождения ученика
-   * @param {string} value - значение даты рождения ученика
+   * Сеттер для отчества ученика
+   * @param {string} value - значение отчества ученика
    */
-  set DateOfBirth(value) {
-    const currentDate = new Date();
-    let dateOfBirth = new Date(value);
-    if (dateOfBirth > currentDate) {
-      alert("Дата рождения не может быть больше текущей даты");
+  set Patronymic(value) {
+    if (value === "") {
       return;
     }
-    this._dateOfBirth = new Intl.DateTimeFormat("ru", {
-      dateStyle: "medium",
-    }).format(dateOfBirth);
+    this._patronymic = value;
   }
 
   /**
@@ -101,19 +82,21 @@ class Person {
   }
 
   /**
-   * Сеттер для номера телефона ученика
-   * @param {string} value - значение номера телефона ученика
+   * Сеттер для даты рождения ученика
+   * @param {string} value - значение даты рождения ученика
    */
-  set PhoneNumber(value) {
-    const exp = /\+79(\d){2}(\d){3}(\d){2}(\d){2}$/;
-    if (!exp.test(value)) {
-      alert("Неверный формат номера телефона");
-      return;
-    } else if (value === "") {
-      alert("Строка пустая!!!!!");
+  set DateOfBirth(value) {
+    const currentDate = new Date();
+    let dateOfBirth = new Date(value);
+    if (dateOfBirth > currentDate) {
       return;
     }
-    this._phoneNumber = value;
+    if (value === "") {
+      return;
+    }
+    this._dateOfBirth = new Intl.DateTimeFormat("ru", {
+      dateStyle: "medium",
+    }).format(dateOfBirth);
   }
 
   /**
@@ -124,19 +107,17 @@ class Person {
   }
 
   /**
-   * Сеттер для адреса электронной почты ученика
-   * @param {string} value - значение адреса электронной почты ученика
+   * Сеттер для номера телефона ученика
+   * @param {string} value - значение номера телефона ученика
    */
-  set Email(value) {
-    const exp = /[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  set PhoneNumber(value) {
+    const exp = /\+79(\d){2}(\d){3}(\d){2}(\d){2}$/;
     if (!exp.test(value)) {
-      alert("Неверный формат адреса электронной почты");
       return;
     } else if (value === "") {
-      alert("Строка пустая!!!!!");
       return;
     }
-    this._email = value;
+    this._phoneNumber = value;
   }
 
   /**
@@ -144,5 +125,19 @@ class Person {
    */
   get Email() {
     return this._email;
+  }
+
+  /**
+   * Сеттер для адреса электронной почты ученика
+   * @param {string} value - значение адреса электронной почты ученика
+   */
+  set Email(value) {
+    const exp = /[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    if (!exp.test(value)) {
+      return;
+    } else if (value === "") {
+      return;
+    }
+    this._email = value;
   }
 }
