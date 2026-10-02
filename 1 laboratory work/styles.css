@@ -1,0 +1,62 @@
+body {
+  background-color: white;
+}
+
+.header-1l-container {
+  background-color: white;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.header-1l-container h1 {
+  font: normal 24px Arial;
+}
+
+.form-container {
+  background-color: white;
+  border-radius: 10px;
+  border: 5px solid blue;
+  margin: 20px;
+  padding: 20px;
+}
+
+.form-container tr {
+  padding: 10px;
+}
+
+.form-container td p {
+  margin-right: 20px;
+  font: normal 14px Verdana;
+}
+
+.form-container td input {
+  font: normal 14px Verdana;
+}
+
+button {
+  padding: 10px 20px 10px 20px;
+  margin: 30px 50% 5px 50%;
+}
+
+.table-container {
+  margin: 10px;
+}
+
+.table-container table {
+  background: black;
+}
+.table-container table td,
+th {
+  background: white;
+  padding: 10px;
+  font: normal 14px Verdana;
+}
+
+/* Подсветка поля, в котором обнаружена ошибка валидации */
+input.invalid {
+  border: 2px solid #d32f2f;
+  background-color: #ffebee;
+  outline: none;
+}

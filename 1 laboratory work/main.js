@@ -29,23 +29,38 @@ function execute(event) {
   let phoneNumber = document.getElementById("phoneNumber").value;
   let email = document.getElementById("email").value;
 
-  let newPerson = new Person(
-    surname,
-    name,
-    patronymic,
-    dateOfBirth,
-    phoneNumber,
-    email,
-  );
+  // Сбрасываем подсветку ошибок с предыдущей попытки
+  document
+    .querySelectorAll("input.invalid")
+    .forEach((input) => input.classList.remove("invalid"));
 
-  addPerson(newPerson);
+  try {
+    let newPerson = new Person(
+      surname,
+      name,
+      patronymic,
+      dateOfBirth,
+      phoneNumber,
+      email,
+    );
+    addPerson(newPerson);
+    document.getElementById("form-student").reset();
+  } catch (error) {
+    alert(error.message);
 
-  document.getElementById("form-student").reset();
-}
-
-function SetRedColorInTextBox(objectElement) {
-  objectElement.style.backgroundColor = "indianred";
-}
-function SetWhiteColorInTextBox(objectElement) {
-  objectElement.style.backgroundColor = "white";
+    // Подсвечиваем и фокусируем поле, в котором обнаружена ошибка
+    if (error.fieldId) {
+      const field = document.getElementById(error.fieldId);
+      if (field) {
+        field.classList.add("invalid");
+        field.focus();
+        // Как только пользователь начнёт исправлять поле, подсветка исчезнет
+        field.addEventListener(
+          "input",
+          () => field.classList.remove("invalid"),
+          { once: true },
+        );
+      }
+    }
+  }
 }

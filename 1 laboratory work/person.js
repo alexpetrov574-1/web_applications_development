@@ -1,4 +1,20 @@
 /**
+ * Ошибка валидации значения поля.
+ * Помимо текста ошибки содержит id поля формы, к которому она относится.
+ */
+class ValueError extends Error {
+  /**
+   * @param {string} message - текст ошибки
+   * @param {string} [fieldId] - id поля формы, которому соответствует ошибка
+   */
+  constructor(message, fieldId = null) {
+    super(message);
+    this.name = "ValueError";
+    this.fieldId = fieldId;
+  }
+}
+
+/**
  * Класс, отражающий информацию об ученике
  */
 class Person {
@@ -7,7 +23,7 @@ class Person {
    * @param {string} surname - фамилия ученика
    * @param {string} name - имя ученика
    * @param {string} patronymic - отчество ученика
-   * @param {string} dateOfBirth - дата рождения ученика
+   * @param {Date} dateOfBirth - дата рождения ученика
    * @param {string} phoneNumber - номер телефона ученика
    * @param {string} email - адрес электронной почты ученика
    */
@@ -32,10 +48,11 @@ class Person {
    * @param {string} value - значение фамилии ученика
    */
   set Surname(value) {
-    if (value === "") {
-      return;
+    if (this.isValidSurname(value)) {
+      this._surname = value;
+    } else {
+      throw new ValueError("Пустое поле фамилии", "surname");
     }
-    this._surname = value;
   }
 
   /**
@@ -50,10 +67,11 @@ class Person {
    * @param {string} value - значение имени ученика
    */
   set Name(value) {
-    if (value === "") {
-      return;
+    if (this.isValidName(value)) {
+      this._name = value;
+    } else {
+      throw new ValueError("Пустое поле имени", "name");
     }
-    this._name = value;
   }
 
   /**
@@ -68,10 +86,11 @@ class Person {
    * @param {string} value - значение отчества ученика
    */
   set Patronymic(value) {
-    if (value === "") {
-      return;
+    if (this.isValidPatronymic(value)) {
+      this._patronymic = value;
+    } else {
+      throw new ValueError("Пустое поле отчества", "patronymic");
     }
-    this._patronymic = value;
   }
 
   /**
@@ -86,17 +105,17 @@ class Person {
    * @param {string} value - значение даты рождения ученика
    */
   set DateOfBirth(value) {
-    const currentDate = new Date();
     let dateOfBirth = new Date(value);
-    if (dateOfBirth > currentDate) {
-      return;
+    if (this.isValidDateOfBirth(value)) {
+      this._dateOfBirth = new Intl.DateTimeFormat("ru", {
+        dateStyle: "medium",
+      }).format(dateOfBirth);
+    } else {
+      throw new ValueError(
+        "Поле пустое или дата рождения не может быть больше, чем сегодняшняя дата",
+        "dateOfBirth",
+      );
     }
-    if (value === "") {
-      return;
-    }
-    this._dateOfBirth = new Intl.DateTimeFormat("ru", {
-      dateStyle: "medium",
-    }).format(dateOfBirth);
   }
 
   /**
@@ -111,13 +130,11 @@ class Person {
    * @param {string} value - значение номера телефона ученика
    */
   set PhoneNumber(value) {
-    const exp = /\+79(\d){2}(\d){3}(\d){2}(\d){2}$/;
-    if (!exp.test(value)) {
-      return;
-    } else if (value === "") {
-      return;
+    if (this.isValidPhoneNumber(value)) {
+      this._phoneNumber = value;
+    } else {
+      throw new ValueError("Неверный формат номера телефона", "phoneNumber");
     }
-    this._phoneNumber = value;
   }
 
   /**
@@ -132,12 +149,38 @@ class Person {
    * @param {string} value - значение адреса электронной почты ученика
    */
   set Email(value) {
-    const exp = /[^@\s]+@[^@\s]+\.[^@\s]+$/;
-    if (!exp.test(value)) {
-      return;
-    } else if (value === "") {
-      return;
+    if (this.isValidEmail(value)) {
+      this._email = value;
+    } else {
+      throw new ValueError("Неверный формат адреса email", "email");
     }
-    this._email = value;
+  }
+
+  isValidSurname(value) {
+    return value !== "";
+  }
+
+  isValidName(value) {
+    return value !== "";
+  }
+
+  isValidPatronymic(value) {
+    return value !== "";
+  }
+
+  isValidDateOfBirth(value) {
+    const currentDate = new Date();
+    let dateOfBirth = new Date(value);
+    return dateOfBirth <= currentDate && value !== "";
+  }
+
+  isValidPhoneNumber(value) {
+    const exp = /\+79(\d){2}(\d){3}(\d){2}(\d){2}$/;
+    return exp.test(value) && value !== "";
+  }
+
+  isValidEmail(value) {
+    const exp = /[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    return exp.test(value) && value !== "";
   }
 }
