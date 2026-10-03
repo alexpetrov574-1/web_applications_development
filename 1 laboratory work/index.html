@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <title>ЛАБОРАТОРНАЯ №1</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="header-1l-container">
+      <h1>Лабораторная работа №1. - Классы.</h1>
+    </div>
+    <div class="form-container">
+      <form id="form-student" onsubmit="execute(event)">
+        <table>
+          <tbody>
+            <tr>
+              <td><p>Фамилия:</p></td>
+              <td><input type="text" id="surname" /></td>
+            </tr>
+            <tr>
+              <td><p>Имя:</p></td>
+              <td><input type="text" id="name" /></td>
+            </tr>
+            <tr>
+              <td><p>Отчество:</p></td>
+              <td><input type="text" id="patronymic" /></td>
+            </tr>
+            <tr>
+              <td><p>Дата рождения:</p></td>
+              <td><input type="date" id="dateOfBirth" /></td>
+            </tr>
+            <tr>
+              <td><p>Номер телефона:</p></td>
+              <td><input type="tel" id="phoneNumber" /></td>
+            </tr>
+            <tr>
+              <td><p>Адрес почты:</p></td>
+              <td><input type="email" id="email" /></td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="submit">Добавить</button>
+      </form>
+    </div>
+    <div class="table-container">
+      <table id="tableOfPersons">
+        <tr>
+          <th>Фамилия</th>
+          <th>Имя</th>
+          <th>Отчество</th>
+          <th>Дата рождения</th>
+          <th>Номер телефона</th>
+          <th>Адрес почты</th>
+        </tr>
+        <tbody></tbody>
+      </table>
+    </div>
+    <script src="person.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
